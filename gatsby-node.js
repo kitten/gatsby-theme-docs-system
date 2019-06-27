@@ -6,9 +6,22 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     return;
   }
 
-  const slug = createFilePath({ node, getNode, trailingSlash: false });
-  const { name = '', relativeDirectory = '' } = getNode(node.parent);
-  const isIndex = name === 'index' || !relativeDirectory;
+  const slug = createFilePath({
+    node,
+    getNode,
+    trailingSlash: false,
+  });
+
+  const { name = '', relativePath, relativeDirectory = '' } = getNode(
+    node.parent
+  );
+  const isIndex = name === 'index' || name === 'README' || !relativeDirectory;
+
+  createNodeField({
+    name: 'from',
+    value: `/${relativePath}`,
+    node,
+  });
 
   createNodeField({
     name: 'slug',
@@ -30,7 +43,7 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
 };
 
 exports.createPages = async ({ graphql, actions, getNode }) => {
-  const { createPage } = actions;
+  const { createPage, createRedirect } = actions;
   const { data, errors } = await graphql(`
     {
       allMdx {
@@ -38,6 +51,7 @@ exports.createPages = async ({ graphql, actions, getNode }) => {
           node {
             id
             fields {
+              from
               slug
             }
           }
@@ -49,12 +63,26 @@ exports.createPages = async ({ graphql, actions, getNode }) => {
   if (errors) throw errors;
 
   data.allMdx.edges.forEach(({ node }) => {
-    const { slug: path } = node.fields;
+    const { slug, from } = node.fields;
 
     createPage({
-      path,
+      path: slug,
       context: { id: node.id },
       component: require.resolve('./src/templates/doc'),
+    });
+
+    createRedirect({
+      redirectInBrowser: true,
+      isPermanent: false,
+      fromPath: `${slug}/`,
+      toPath: slug,
+    });
+
+    createRedirect({
+      redirectInBrowser: true,
+      isPermanent: false,
+      fromPath: from,
+      toPath: slug,
     });
   });
 };

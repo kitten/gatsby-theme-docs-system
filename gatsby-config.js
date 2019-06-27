@@ -10,6 +10,7 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-styled-components',
+    'gatsby-plugin-remove-trailing-slashes',
     'gatsby-plugin-catch-links',
     'gatsby-plugin-sharp',
     'gatsby-plugin-sitemap',

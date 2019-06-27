@@ -6,6 +6,10 @@ const Global = createGlobalStyle`
     box-sizing: border-box;
   }
 
+  a {
+    color: ${p => p.theme.colors.fgActive};
+  }
+
   #nprogress .bar {
     background-color: ${p => p.theme.colors.fgActive};
   }

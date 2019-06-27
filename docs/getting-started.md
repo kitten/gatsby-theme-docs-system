@@ -7,4 +7,4 @@ Install etc
 
 > This is a test
 
-Install etc
+[Check introduction next!](./index.md)
