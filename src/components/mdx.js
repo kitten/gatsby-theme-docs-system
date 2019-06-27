@@ -19,9 +19,12 @@ const anchor = (
   </svg>
 );
 
-const overflowStyle = css`
+const codeStyle = css`
   -webkit-overflow-scrolling: touch;
   overflow-x: auto;
+  font-variant-ligatures: none;
+  font-feature-settings: normal;
+  white-space: nowrap;
 `;
 
 const codeLabelStyle = css`
@@ -59,6 +62,7 @@ const Pre = ({ children, className, style }) => (
     maxWidth="100%"
     bg="bgPassive"
     fontSize={1}
+    pt={[2, 0]}
     mt={2}
     mb={3}
   >
@@ -71,7 +75,7 @@ const Code = ({ children, className }) => (
     as="code"
     display="block"
     fontFamily="code"
-    css={overflowStyle}
+    css={codeStyle}
     className={className}
     py={2}
     px={2}
@@ -160,10 +164,12 @@ const code = ({ className, children }) => {
 
 const inlineCode = styled.code`
   display: inline-block;
-  font-family: ${p => p.theme.fonts.code.join(',')};
   background-color: ${p => p.theme.colors.bgPassive};
   border-radius: ${p => p.theme.radii[0]}px;
+  font-family: ${p => p.theme.fonts.code.join(',')};
   font-size: inherit;
+  font-variant-ligatures: none;
+  font-feature-settings: normal;
   padding: 0 0.2em;
   margin: 0;
 `;
