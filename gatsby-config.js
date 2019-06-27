@@ -10,6 +10,7 @@ module.exports = {
     'gatsby-plugin-styled-components',
     'gatsby-plugin-catch-links',
     'gatsby-plugin-sharp',
+    'gatsby-plugin-nprogress',
     {
       resolve: 'gatsby-plugin-mdx',
       options: {

@@ -46,6 +46,7 @@
     "gatsby-plugin-catch-links": "^2.1.0",
     "gatsby-plugin-compile-es6-packages": "^1.1.0",
     "gatsby-plugin-mdx": "^1.0.5",
+    "gatsby-plugin-nprogress": "^2.1.0",
     "gatsby-plugin-page-creator": "^2.1.1",
     "gatsby-plugin-react-helmet": "^3.1.0",
     "gatsby-plugin-sharp": "^2.2.1",
