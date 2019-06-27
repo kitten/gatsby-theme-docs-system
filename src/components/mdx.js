@@ -46,7 +46,6 @@ const Pre = ({ children, className, style }) => (
     className={className}
     position="relative"
     color={style.color}
-    fontFamily="code"
     borderRadius={0}
     maxWidth="100%"
     bg="bgPassive"
@@ -62,6 +61,7 @@ const Code = ({ children, className }) => (
   <Box
     as="code"
     display="block"
+    fontFamily="code"
     css={overflowStyle}
     className={className}
     py={2}
