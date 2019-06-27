@@ -1,6 +1,6 @@
 {
   "name": "gatsby-theme-docs-system",
-  "version": "0.1.5",
+  "version": "0.1.6",
   "description": "A Gatsby theme for beautiful and themeable markdown docs",
   "main": "index.js",
   "repository": "https://www.github.com/kitten/gatsby-theme-docs-system",
