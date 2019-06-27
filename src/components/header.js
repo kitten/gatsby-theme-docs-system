@@ -22,8 +22,9 @@ const Header = ({ children }) => {
       flexDirection="row"
       alignItems="center"
       height={1}
+      px={3}
     >
-      <Box as="h3" px={3} m={0}>
+      <Box as="h3" m={0}>
         <Box as="a" m={2} href="/" css={linkStyle}>
           {siteMetadata.title}
         </Box>

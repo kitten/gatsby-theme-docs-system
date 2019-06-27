@@ -5,6 +5,11 @@ import Header from './header';
 import SidebarContent from './sidebar';
 import Box from './box';
 
+const overflowStyle = css`
+  -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
+`;
+
 const Root = ({ children }) => (
   <Box display="flex" flexDirection="row" flex="1 1 auto">
     {children}
@@ -19,17 +24,14 @@ const Sidebar = ({ children }) => (
     minWidth="0"
     maxHeight="100vh"
     width={2}
-    css={css`
-      -webkit-overflow-scrolling: touch;
-      overflow-y: auto;
-    `}
+    css={overflowStyle}
   >
     {children}
   </Box>
 );
 
 const Container = ({ children }) => (
-  <Box as="main" width="100%" maxWidth={6} mx="auto" p={4}>
+  <Box as="main" width="100%" maxWidth={7} mx="auto" p={4}>
     {children}
   </Box>
 );
