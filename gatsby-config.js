@@ -48,14 +48,14 @@ module.exports = {
       resolve: 'gatsby-plugin-alias-imports',
       options: {
         alias: {
-          'gatsby-theme-docs-system/theme': path.join(cwd, 'theme'),
+          'gatsby-theme-docs-system/theme': path.join(cwd, 'gatsby/theme'),
         },
       },
     },
     {
       resolve: 'gatsby-plugin-typography',
       options: {
-        pathToConfigModule: path.join(cwd, 'typography'),
+        pathToConfigModule: path.join(cwd, 'gatsby/typography'),
       },
     },
     {

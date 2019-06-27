@@ -4,11 +4,11 @@ import * as theme from 'gatsby-theme-docs-system/theme';
 
 import Global from './components/global';
 
-export const wrapRootElement = ({ element }) => (
+export const withTheme = Component => props => (
   <ThemeProvider theme={theme}>
     <>
       <Global m="0" color="fg" bg="bg" />
-      {element}
+      <Component {...props} />
     </>
   </ThemeProvider>
 );

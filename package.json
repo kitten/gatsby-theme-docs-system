@@ -5,6 +5,11 @@
   "main": "index.js",
   "repository": "https://www.github.com/kitten/gatsby-theme-docs-system",
   "license": "MIT",
+  "files": [
+    "src",
+    "gatsby",
+    "*.js"
+  ],
   "keywords": [
     "gatsby",
     "theme",

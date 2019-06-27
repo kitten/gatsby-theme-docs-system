@@ -5,6 +5,7 @@ import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer';
 import GithubSlugger from 'github-slugger';
 
 import { css } from 'styled-components';
+import { withTheme } from '../theme';
 import MDXComponents from '../components/mdx';
 import Box from '../components/box';
 import Layout from '../components/layout';
@@ -100,4 +101,4 @@ export const pageQuery = graphql`
   }
 `;
 
-export default DocTemplate;
+export default withTheme(DocTemplate);
