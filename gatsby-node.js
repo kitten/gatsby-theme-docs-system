@@ -71,15 +71,6 @@ exports.createPages = async ({ graphql, actions, getNode }) => {
       component: require.resolve('./src/templates/doc'),
     });
 
-    if (slug !== '/') {
-      createRedirect({
-        redirectInBrowser: true,
-        isPermanent: false,
-        fromPath: `${slug}/`,
-        toPath: slug,
-      });
-    }
-
     createRedirect({
       redirectInBrowser: true,
       isPermanent: false,
