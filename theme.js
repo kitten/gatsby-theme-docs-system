@@ -1,3 +1,4 @@
+import nightOwlLight from 'prism-react-renderer/themes/nightOwlLight';
 import './theme.css';
 
 const systemFonts = [
@@ -17,6 +18,7 @@ const systemFonts = [
 
 export const fonts = {
   header: ['phantom-sans', ...systemFonts],
+  code: ['space-mono', 'monospace'],
   body: systemFonts,
 };
 
@@ -30,6 +32,7 @@ export const colors = {
   fgActive: '#8a4baf',
 };
 
+export const prismTheme = nightOwlLight;
 export const fontSizes = [12, 14, 16, 20, 24, 32, 48, 64, 96];
 export const fontWeights = ['300', '400', '500', '700', '800'];
 export const letterSpacings = ['normal', '0.01em', '0.05em', '0.1em'];

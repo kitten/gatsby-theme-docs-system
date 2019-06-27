@@ -9,6 +9,14 @@ Wonka is a stream library
 
 A stream library. Nam ut massa nec ligula euismod pulvinar ut in sem. Nunc consectetur, diam condimentum vulputate finibus, justo ante molestie sem, efficitur congue leo lectus ut arcu. Praesent elementum lectus in arcu sodales efficitur. Vivamus at viverra arcu. Proin interdum justo nec dapibus consequat. Donec scelerisque sit amet ante non fringilla. Donec nisi nulla, suscipit vitae nulla sit amet, faucibus tristique mauris. Praesent ut dolor urna. Curabitur sed ex et leo dictum tempus a tempor massa.
 
+This is an inline `code` snippet.
+
+```js
+const test = snippet();
+const test = snippet();
+const test = snippet();
+```
+
 ## To do what?
 
 To stream values. Fusce blandit quam vitae nunc semper pretium. Integer sagittis nunc dapibus justo tincidunt maximus. Praesent gravida molestie urna, quis iaculis est suscipit id. Maecenas non justo eros. Phasellus sem tortor, lobortis sed facilisis varius, efficitur vitae sem. Maecenas sollicitudin volutpat elit eget viverra. Nulla quis luctus quam, vitae varius lacus.

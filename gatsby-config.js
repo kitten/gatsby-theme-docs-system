@@ -9,11 +9,31 @@ module.exports = {
   plugins: [
     'gatsby-plugin-styled-components',
     'gatsby-plugin-catch-links',
+    'gatsby-plugin-sharp',
     {
       resolve: 'gatsby-plugin-mdx',
       options: {
         extensions: ['.mdx', '.md'],
         remarkPlugins: [require('remark-slug'), require('remark-emoji')],
+        gatsbyRemarkPlugins: [
+          {
+            resolve: 'gatsby-remark-smartypants',
+          },
+          {
+            resolve: 'gatsby-remark-external-links',
+            options: {
+              target: '_self',
+              rel: 'nofollow',
+            },
+          },
+          {
+            resolve: 'gatsby-remark-images',
+            options: {
+              maxWidth: 650,
+              withWebp: true,
+            },
+          },
+        ],
       },
     },
     {

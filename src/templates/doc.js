@@ -5,6 +5,7 @@ import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer';
 import GithubSlugger from 'github-slugger';
 
 import { css } from 'styled-components';
+import MDXComponents from '../components/mdx';
 import Box from '../components/box';
 import Layout from '../components/layout';
 
@@ -71,7 +72,9 @@ const DocTemplate = ({ data: { site, mdx } }) => (
       {mdx.headings.length > 2 ? <SectionList headings={mdx.headings} /> : null}
 
       <Box as="main" flex="1 1 auto" py={3}>
-        <MDXRenderer>{mdx.body}</MDXRenderer>
+        <MDXComponents>
+          <MDXRenderer>{mdx.body}</MDXRenderer>
+        </MDXComponents>
       </Box>
     </Box>
   </Layout>
