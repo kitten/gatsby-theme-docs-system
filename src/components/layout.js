@@ -1,4 +1,5 @@
 import React, { useState, useCallback } from 'react';
+import { createGlobalStyle } from 'styled-components';
 import VisuallyHidden from '@reach/visually-hidden';
 import { SkipNavLink, SkipNavContent } from '@reach/skip-nav';
 import { css } from 'styled-components';
@@ -6,6 +7,15 @@ import { css } from 'styled-components';
 import Header from './header';
 import SidebarContent from './sidebar';
 import Box from './box';
+
+const BlockScroll = createGlobalStyle`
+  @media (max-width: ${p => p.theme.breakpoints[0]}) {
+    html, body {
+      overflow: hidden;
+      position: fixed;
+    }
+  }
+`;
 
 const overflowStyle = css`
   -webkit-overflow-scrolling: touch;
@@ -34,6 +44,7 @@ const Sidebar = ({ isMenuOpen, children }) => (
     pt={[5, 0]}
     top="0"
   >
+    {isMenuOpen && <BlockScroll />}
     {children}
   </Box>
 );
@@ -54,7 +65,8 @@ const Layout = ({ children }) => {
         <SkipNavLink />
       </VisuallyHidden>
 
-      <Header toggleMenu={toggleMenu} />
+      <Header isMenuOpen={isMenuOpen} toggleMenu={toggleMenu} />
+
       <Root>
         <Sidebar isMenuOpen={isMenuOpen}>
           <SidebarContent />

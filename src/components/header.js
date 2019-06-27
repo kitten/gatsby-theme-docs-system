@@ -47,7 +47,7 @@ const MenuButton = styled.button.attrs(() => ({
   }
 `;
 
-const Header = ({ toggleMenu, children }) => {
+const Header = ({ isMenuOpen, toggleMenu, children }) => {
   const {
     site: { siteMetadata },
   } = withHeaderData();
@@ -60,10 +60,11 @@ const Header = ({ toggleMenu, children }) => {
       flexDirection="row"
       alignItems="center"
       justifyContent="space-between"
-      position="relative"
+      position={[isMenuOpen ? 'fixed' : 'relative', 'relative']}
       zIndex={2}
       bg="bgActive"
       height={1}
+      top="0"
       px={3}
     >
       <Box as="h3" m={0}>
