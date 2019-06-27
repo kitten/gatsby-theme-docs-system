@@ -63,7 +63,15 @@ const SectionList = ({ headings }) => {
 
 const DocTemplate = ({ data: { site, mdx } }) => (
   <Layout>
-    <Helmet title={`${mdx.frontmatter.title} – ${site.siteMetadata.title}`} />
+    <Helmet
+      title={`${mdx.frontmatter.title} – ${site.siteMetadata.title}`}
+      htmlAttributes={{ lang: 'en' }}
+    >
+      <link
+        rel="canonical"
+        href={site.siteMetadata.siteUrl + mdx.fields.slug}
+      />
+    </Helmet>
 
     <Box as="h1" borderBottom={0}>
       {mdx.frontmatter.title}
@@ -86,6 +94,7 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
+        siteUrl
       }
     }
     mdx(id: { eq: $id }) {
@@ -93,6 +102,9 @@ export const pageQuery = graphql`
       body
       frontmatter {
         title
+      }
+      fields {
+        slug
       }
       headings(depth: h2) {
         value

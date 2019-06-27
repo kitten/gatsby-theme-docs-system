@@ -4,12 +4,15 @@ const cwd = process.cwd();
 
 module.exports = {
   siteMetadata: {
-    title: 'Wonka',
+    title: 'Docs System',
+    description: 'A beatiful docs generator for Gatsby',
+    siteUrl: 'https://docs-system.example.com',
   },
   plugins: [
     'gatsby-plugin-styled-components',
     'gatsby-plugin-catch-links',
     'gatsby-plugin-sharp',
+    'gatsby-plugin-sitemap',
     'gatsby-plugin-nprogress',
     {
       resolve: 'gatsby-plugin-mdx',
@@ -65,5 +68,5 @@ module.exports = {
         modules: ['gatsby-theme-docs-system'],
       },
     },
-  ],
+  ].filter(Boolean),
 };
