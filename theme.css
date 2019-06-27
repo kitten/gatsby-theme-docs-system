@@ -1,0 +1,9 @@
+@font-face {
+  font-family: 'phantom-sans';
+  src: url("https://phantomsans.kitten.sh/PhantomSans05VAR.woff2") format("woff2-variations"),
+       url("https://phantomsans.kitten.sh/PhantomSans05VAR.ttf") format("truetype-variations"),
+       url("https://phantomsans.kitten.sh/PhantomSans-Regular.woff2") format("woff2"),
+       url("https://phantomsans.kitten.sh/PhantomSans-Regular.ttf") format("truetype");
+  font-weight: 1 999;
+  font-style: normal;
+}
