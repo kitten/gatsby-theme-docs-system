@@ -1,4 +1,5 @@
 import React from 'react';
+import { Helmet } from 'react-helmet';
 import { graphql } from 'gatsby';
 import MDXRenderer from 'gatsby-plugin-mdx/mdx-renderer';
 import GithubSlugger from 'github-slugger';
@@ -34,12 +35,12 @@ const SectionList = ({ headings }) => {
   return (
     <Box
       as="aside"
-      position="sticky"
-      minWidth={2}
+      position={['relative', 'sticky']}
+      minWidth={['100%', 2]}
+      maxHeight={['auto', '100vh']}
       top="0"
-      pl={4}
-      py={4}
-      maxHeight="100vh"
+      pl={[0, 4]}
+      py={[2, 4]}
       css={overflowStyle}
     >
       <Box as="h4" m={0} pb={2}>
@@ -58,13 +59,15 @@ const SectionList = ({ headings }) => {
   );
 };
 
-const DocTemplate = ({ data: { mdx } }) => (
+const DocTemplate = ({ data: { site, mdx } }) => (
   <Layout>
+    <Helmet title={`${mdx.frontmatter.title} – ${site.siteMetadata.title}`} />
+
     <Box as="h1" borderBottom={0}>
       {mdx.frontmatter.title}
     </Box>
 
-    <Box display="flex" flexDirection="row-reverse">
+    <Box display="flex" flexDirection={['column', 'row-reverse']}>
       {mdx.headings.length > 2 ? <SectionList headings={mdx.headings} /> : null}
 
       <Box as="main" flex="1 1 auto" py={3}>
@@ -76,6 +79,11 @@ const DocTemplate = ({ data: { mdx } }) => (
 
 export const pageQuery = graphql`
   query($id: String) {
+    site {
+      siteMetadata {
+        title
+      }
+    }
     mdx(id: { eq: $id }) {
       id
       body

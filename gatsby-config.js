@@ -4,7 +4,7 @@ const cwd = process.cwd();
 
 module.exports = {
   siteMetadata: {
-    title: '',
+    title: 'Wonka',
   },
   plugins: [
     'gatsby-plugin-styled-components',

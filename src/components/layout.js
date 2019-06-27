@@ -11,7 +11,7 @@ const overflowStyle = css`
 `;
 
 const Root = ({ children }) => (
-  <Box display="flex" flexDirection="row" flex="1 1 auto">
+  <Box flexDirection={['column', 'row']} flex="1 1 auto" display="flex">
     {children}
   </Box>
 );
@@ -19,12 +19,12 @@ const Root = ({ children }) => (
 const Sidebar = ({ children }) => (
   <Box
     as="nav"
-    position="sticky"
-    top="0"
-    minWidth="0"
-    maxHeight="100vh"
-    width={2}
+    position={['relative', 'sticky']}
+    maxHeight={['auto', '100vh']}
+    width={['100%', 2]}
+    minWidth={['100%', '0']}
     css={overflowStyle}
+    top="0"
   >
     {children}
   </Box>
