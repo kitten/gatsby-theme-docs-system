@@ -132,6 +132,10 @@ const PermalinkWrapper = styled.a.attrs(() => ({
   transition: opacity 0.1s;
   fill: ${p => p.theme.colors.fgActive};
 
+  @media screen and (max-width: ${p => p.theme.breakpoints[0]}) {
+    opacity: 1;
+  }
+
   ${Heading}:hover & {
     opacity: 1;
   }
