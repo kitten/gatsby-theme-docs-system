@@ -48,11 +48,11 @@ const Pre = ({ children, className, style }) => (
     color={style.color}
     fontFamily="code"
     borderRadius={0}
+    maxWidth="100%"
     bg="bgPassive"
     fontSize={1}
     mt={2}
     mb={3}
-    mx={-2}
   >
     {children}
   </Box>

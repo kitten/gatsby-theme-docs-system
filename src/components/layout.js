@@ -39,7 +39,7 @@ const Sidebar = ({ isMenuOpen, children }) => (
 );
 
 const Container = ({ children }) => (
-  <Box as="main" width="100%" maxWidth={7} mx="auto" p={4}>
+  <Box width="100%" maxWidth={7} mx="auto" p={4}>
     {children}
   </Box>
 );
