@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { css } from 'styled-components';
 
 import Header from './header';
@@ -16,14 +16,20 @@ const Root = ({ children }) => (
   </Box>
 );
 
-const Sidebar = ({ children }) => (
+const Sidebar = ({ isMenuOpen, children }) => (
   <Box
     as="nav"
-    position={['relative', 'sticky']}
+    position={['fixed', 'sticky']}
+    display={[isMenuOpen ? 'block' : 'none', 'block']}
     maxHeight={['auto', '100vh']}
-    width={['100%', 2]}
+    bg={['bg', 'transparent']}
+    height={['100vh', 'auto']}
     minWidth={['100%', '0']}
+    bottom={['0', 'unset']}
+    width={['100%', 2]}
     css={overflowStyle}
+    zIndex={1}
+    pt={[5, 0]}
     top="0"
   >
     {children}
@@ -36,16 +42,21 @@ const Container = ({ children }) => (
   </Box>
 );
 
-const Layout = ({ children }) => (
-  <>
-    <Header />
-    <Root>
-      <Sidebar>
-        <SidebarContent />
-      </Sidebar>
-      <Container>{children}</Container>
-    </Root>
-  </>
-);
+const Layout = ({ children }) => {
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const toggleMenu = useCallback(() => setMenuOpen(x => !x), []);
+
+  return (
+    <>
+      <Header toggleMenu={toggleMenu} />
+      <Root>
+        <Sidebar isMenuOpen={isMenuOpen}>
+          <SidebarContent />
+        </Sidebar>
+        <Container>{children}</Container>
+      </Root>
+    </>
+  );
+};
 
 export default Layout;
