@@ -29,9 +29,18 @@ const codeLabelStyle = css`
   border-bottom-right-radius: ${p => p.theme.radii[0]}px;
   user-select: none;
   transition: opacity 0.2s;
+  opacity: 1;
 
-  &:hover {
-    opacity: 0.2;
+  @media screen and (min-width: ${p => p.theme.breakpoints[0]}) {
+    &:hover {
+      opacity: 0.2;
+    }
+  }
+
+  @media screen and (max-width: ${p => p.theme.breakpoints[0]}) {
+    border-radius: ${p => p.theme.radii[0]}px;
+    margin-top: -1em;
+    right: 1em;
   }
 `;
 
