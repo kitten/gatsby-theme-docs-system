@@ -1,4 +1,6 @@
 import React, { useState, useCallback } from 'react';
+import VisuallyHidden from '@reach/visually-hidden';
+import { SkipNavLink, SkipNavContent } from '@reach/skip-nav';
 import { css } from 'styled-components';
 
 import Header from './header';
@@ -48,12 +50,19 @@ const Layout = ({ children }) => {
 
   return (
     <>
+      <VisuallyHidden>
+        <SkipNavLink />
+      </VisuallyHidden>
+
       <Header toggleMenu={toggleMenu} />
       <Root>
         <Sidebar isMenuOpen={isMenuOpen}>
           <SidebarContent />
         </Sidebar>
-        <Container>{children}</Container>
+        <Container>
+          <SkipNavContent />
+          {children}
+        </Container>
       </Root>
     </>
   );
