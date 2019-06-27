@@ -155,6 +155,12 @@ const inlineCode = styled.code`
   margin: 0;
 `;
 
+const blockquote = ({ children }) => (
+  <Box as="blockquote" borderLeft={2} color="fgPassive" ml={0} py={2} pl={3}>
+    {children}
+  </Box>
+);
+
 const components = {
   h2: heading('h2'),
   h3: heading('h3'),
@@ -162,6 +168,7 @@ const components = {
   h5: heading('h5'),
   h6: heading('h6'),
   code,
+  blockquote,
   inlineCode,
 };
 
