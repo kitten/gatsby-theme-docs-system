@@ -6,16 +6,17 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
     return;
   }
 
-  const slug = createFilePath({
-    node,
-    getNode,
-    trailingSlash: false,
-  });
-
   const { name = '', relativePath, relativeDirectory = '' } = getNode(
     node.parent
   );
+
   const isIndex = name === 'index' || name === 'README' || !relativeDirectory;
+
+  const slug = createFilePath({
+    node,
+    getNode,
+    trailingSlash: isIndex,
+  });
 
   createNodeField({
     name: 'from',
