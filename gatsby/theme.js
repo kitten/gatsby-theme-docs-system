@@ -48,14 +48,3 @@ export const borders = [
   `${borderWidths[1]} solid ${colors.bgPassive}`,
   `${borderWidths[2]} solid ${colors.bgPassive}`,
 ];
-
-export const shadows = [
-  'rgba(46, 41, 51, 0.08) 0px 1px 2px, rgba(71, 63, 79, 0.08) 0px 2px 4px',
-  'rgba(0, 0, 0, 0.2) 0 1px 0 0, rgba(0, 0, 0, 0.1) 0 2px 3px 0',
-];
-
-export const mediaQueries = {
-  small: `@media screen and (min-width: ${breakpoints[0]})`,
-  medium: `@media screen and (min-width: ${breakpoints[1]})`,
-  large: `@media screen and (min-width: ${breakpoints[2]})`,
-};
