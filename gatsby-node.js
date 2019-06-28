@@ -11,7 +11,6 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
   );
 
   const isIndex = name === 'index' || name === 'README' || !relativeDirectory;
-
   const slug = createFilePath({
     node,
     getNode,

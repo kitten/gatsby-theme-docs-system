@@ -1,6 +1,12 @@
-import React, { useState, useCallback } from 'react';
-import { createGlobalStyle } from 'styled-components';
+import React, {
+  useContext,
+  useMemo,
+  useState,
+  useEffect,
+  useCallback,
+} from 'react';
 import VisuallyHidden from '@reach/visually-hidden';
+import { ThemeContext } from 'styled-components';
 import { SkipNavLink, SkipNavContent } from '@reach/skip-nav';
 import { css } from 'styled-components';
 
@@ -8,19 +14,32 @@ import Header from './header';
 import SidebarContent from './sidebar';
 import Box from './box';
 
-const BlockScroll = createGlobalStyle`
-  @media (max-width: ${p => p.theme.breakpoints[0]}) {
-    html, body {
-      overflow: hidden;
-      position: fixed;
-    }
-  }
-`;
-
 const overflowStyle = css`
   -webkit-overflow-scrolling: touch;
   overflow-y: auto;
 `;
+
+const useIsMobile = media => {
+  if (typeof window === 'undefined') {
+    return false;
+  }
+
+  const theme = useContext(ThemeContext);
+
+  const mq = useMemo(() => {
+    return window.matchMedia(`(max-width: ${theme.breakpoints[0]}`);
+  }, []);
+
+  const [matches, setMatches] = useState(mq.matches);
+
+  useEffect(() => {
+    const update = () => setMatches(mq.matches);
+    mq.addListener(update);
+    return () => mq.removeListener(update);
+  }, []);
+
+  return matches;
+};
 
 const Root = ({ children }) => (
   <Box flexDirection={['column', 'row']} flex="1 1 auto" display="flex">
@@ -28,26 +47,39 @@ const Root = ({ children }) => (
   </Box>
 );
 
-const Sidebar = ({ isMenuOpen, children }) => (
-  <Box
-    as="nav"
-    position={['fixed', 'sticky']}
-    display={[isMenuOpen ? 'block' : 'none', 'block']}
-    maxHeight={['auto', '100vh']}
-    bg={['bg', 'transparent']}
-    height={['100vh', 'auto']}
-    minWidth={['100%', '0']}
-    bottom={['0', 'unset']}
-    width={['100%', 2]}
-    css={overflowStyle}
-    zIndex={1}
-    pt={[5, 0]}
-    top="0"
-  >
-    {isMenuOpen && <BlockScroll />}
-    {children}
-  </Box>
-);
+const Sidebar = ({ isMenuOpen, children }) => {
+  const isMobile = useIsMobile();
+
+  useEffect(() => {
+    if (isMenuOpen && isMobile) {
+      document.body.style.overflow = 'hidden';
+      document.body.style.position = 'fixed';
+    } else {
+      document.body.style.overflow = 'auto';
+      document.body.style.position = 'static';
+    }
+  }, [isMenuOpen, isMobile]);
+
+  return (
+    <Box
+      as="nav"
+      position={['fixed', 'sticky']}
+      display={[isMenuOpen ? 'block' : 'none', 'block']}
+      maxHeight={['auto', '100vh']}
+      bg={['bg', 'transparent']}
+      height={['100vh', 'auto']}
+      minWidth={['100%', '0']}
+      bottom={['0', 'unset']}
+      width={['100%', 2]}
+      css={overflowStyle}
+      zIndex={1}
+      pt={[5, 0]}
+      top="0"
+    >
+      {children}
+    </Box>
+  );
+};
 
 const Container = ({ children }) => (
   <Box width="100%" maxWidth={7} mx="auto" p={4}>

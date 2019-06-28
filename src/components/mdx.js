@@ -24,7 +24,7 @@ const codeStyle = css`
   overflow-x: auto;
   font-variant-ligatures: none;
   font-feature-settings: normal;
-  white-space: nowrap;
+  white-space: pre;
 `;
 
 const codeLabelStyle = css`
