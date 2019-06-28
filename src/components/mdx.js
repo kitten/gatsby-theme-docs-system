@@ -22,6 +22,7 @@ const anchor = (
 const codeStyle = css`
   -webkit-overflow-scrolling: touch;
   overflow-x: auto;
+  overflow-wrap: unset;
   font-variant-ligatures: none;
   font-feature-settings: normal;
   white-space: pre;
