@@ -15,6 +15,10 @@ This is an inline `code` snippet.
 const test = snippet();
 const test = snippet();
 const test = snippet();
+const test = snippet();
+const test = snippet();
+const test = snippet();
+const test = snippet();
 ```
 
 ## To do what?

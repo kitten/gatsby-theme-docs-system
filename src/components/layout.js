@@ -68,7 +68,7 @@ const Sidebar = ({ isMenuOpen, children }) => {
       maxHeight={['auto', '100vh']}
       bg={['bg', 'transparent']}
       height={['100vh', 'auto']}
-      minWidth={['100%', '0']}
+      minWidth={['100%', 1]}
       bottom={['0', 'unset']}
       width={['100%', 2]}
       css={overflowStyle}

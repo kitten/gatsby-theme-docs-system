@@ -77,10 +77,14 @@ const DocTemplate = ({ data: { site, mdx } }) => (
       {mdx.frontmatter.title}
     </Box>
 
-    <Box display="flex" flexDirection={['column', 'row-reverse']}>
+    <Box
+      display="flex"
+      justifyContent={['flex-start', 'flex-start', 'space-between']}
+      flexDirection={['column', 'column', 'row-reverse']}
+    >
       {mdx.headings.length > 2 ? <SectionList headings={mdx.headings} /> : null}
 
-      <Box as="main" flex="1 1 auto" py={3}>
+      <Box as="main" maxWidth={5} flex="1 1" py={3}>
         <MDXComponents>
           <MDXRenderer>{mdx.body}</MDXRenderer>
         </MDXComponents>
