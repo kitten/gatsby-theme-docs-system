@@ -54,26 +54,31 @@ const Header = ({ isMenuOpen, toggleMenu, children }) => {
 
   return (
     <Box
-      as="header"
       width="100%"
-      display="flex"
-      flexDirection="row"
-      alignItems="center"
-      justifyContent="space-between"
+      bg="bgActive"
       position={[isMenuOpen ? 'fixed' : 'relative', 'relative']}
       zIndex={2}
-      bg="bgActive"
-      height={1}
       top="0"
-      px={3}
     >
-      <Box as="h3" m={0}>
-        <Box as="a" m={2} href="/" css={linkStyle}>
-          {siteMetadata.title}
+      <Box
+        as="header"
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        justifyContent="space-between"
+        height={1}
+        px={3}
+        maxWidth={8}
+        margin="0 auto"
+      >
+        <Box as="h3" m={0}>
+          <Box as="a" m={2} href="/" css={linkStyle}>
+            {siteMetadata.title}
+          </Box>
         </Box>
-      </Box>
-      <Box display={['block', 'none']}>
-        <MenuButton onClick={toggleMenu}>{hamburger}</MenuButton>
+        <Box display={['block', 'none']}>
+          <MenuButton onClick={toggleMenu}>{hamburger}</MenuButton>
+        </Box>
       </Box>
     </Box>
   );

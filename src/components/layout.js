@@ -42,7 +42,13 @@ const useIsMobile = media => {
 };
 
 const Root = ({ children }) => (
-  <Box flexDirection={['column', 'row']} flex="1 1 auto" display="flex">
+  <Box
+    flexDirection={['column', 'row']}
+    alignItems="flex-start"
+    display="flex"
+    maxWidth={8}
+    margin="0 auto"
+  >
     {children}
   </Box>
 );
@@ -55,7 +61,7 @@ const Sidebar = ({ isMenuOpen, children }) => {
       document.body.style.overflow = 'hidden';
       document.body.style.position = 'fixed';
     } else {
-      document.body.style.overflow = 'auto';
+      document.body.style.overflow = 'unset';
       document.body.style.position = 'static';
     }
   }, [isMenuOpen, isMobile]);
