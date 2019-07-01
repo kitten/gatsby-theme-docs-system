@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { Link as GatsbyLink } from 'gatsby';
 import styled, { css } from 'styled-components';
-import { graphql, useStaticQuery } from 'gatsby';
 import Box from './box';
+import { useContentData } from './useContentData';
 
 const listStyle = css`
   list-style-type: none;
@@ -49,26 +49,7 @@ const MenuItem = ({ children }) => (
 );
 
 const Sidebar = ({ children }) => {
-  const { parentItems, childItems } = withSidebarData();
-
-  const items = useMemo(() => {
-    const { nodes: parents } = parentItems;
-    const { group: groups } = childItems;
-
-    return parents.map(node => {
-      const { parent } = node.fields;
-
-      let children = [];
-      if (parent) {
-        const group = groups.find(group => group.fieldValue === parent);
-        if (group) {
-          children = group.nodes;
-        }
-      }
-
-      return { ...node, children };
-    });
-  }, [parentItems, childItems]);
+  const items = useContentData();
 
   return (
     <MenuList>
@@ -89,47 +70,6 @@ const Sidebar = ({ children }) => {
       ))}
     </MenuList>
   );
-};
-
-const withSidebarData = () => {
-  return useStaticQuery(graphql`
-    query SidebarQuery {
-      parentItems: allMdx(
-        filter: { fields: { type: { eq: "parent" } } }
-        sort: { fields: frontmatter___order, order: ASC }
-      ) {
-        nodes {
-          id
-          frontmatter {
-            title
-          }
-          fields {
-            slug
-          }
-          fields {
-            parent
-          }
-        }
-      }
-      childItems: allMdx(
-        filter: { fields: { type: { eq: "child" } } }
-        sort: { fields: frontmatter___order, order: ASC }
-      ) {
-        group(field: fields___parent) {
-          fieldValue
-          nodes {
-            id
-            frontmatter {
-              title
-            }
-            fields {
-              slug
-            }
-          }
-        }
-      }
-    }
-  `);
 };
 
 export default Sidebar;

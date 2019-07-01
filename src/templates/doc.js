@@ -7,7 +7,9 @@ import GithubSlugger from 'github-slugger';
 
 import { withTheme } from '../theme';
 import MDXComponents from '../components/mdx';
+import { usePagesData } from '../components/useContentData';
 import GithubIcon from '../components/icons/github';
+import ArrowIcon from '../components/icons/arrow';
 import Box from '../components/box';
 import Layout from '../components/layout';
 
@@ -15,6 +17,12 @@ const overflowStyle = css`
   -webkit-overflow-scrolling: touch;
   overflow-y: auto;
 `;
+
+const GreyText = ({ children }) => (
+  <Box as="span" color="fgPassive">
+    {children}
+  </Box>
+);
 
 const MenuList = styled(Box).attrs(() => ({
   as: 'ul',
@@ -33,14 +41,65 @@ const extraLinkStyle = css`
   text-decoration: none;
 `;
 
-const MenuItem = ({ children }) => (
-  <Box as="li" fontWeight={2} m={0} pb={1}>
+const NextPage = ({ children }) => (
+  <>
+    <Box as="span" color="fgPassive">
+      {` Next Page `}
+    </Box>
+    <Box as="span"></Box>
+  </>
+);
+
+const MenuItem = ({ children, ...props }) => (
+  <Box as="li" fontWeight={2} m={0} pb={1} {...props}>
     {children}
   </Box>
 );
 
-const SectionList = ({ documentUrl, headings }) => {
+const SectionList = ({ documentUrl, currentPageId, headings }) => {
   const slugger = new GithubSlugger();
+  const overview =
+    headings.length > 1 ? (
+      <>
+        <Box as="h4" m={0} pb={2}>
+          In this section
+        </Box>
+        <MenuList>
+          {headings.map(({ value }, index) => (
+            <MenuItem key={index}>
+              <Box as="a" href={`#${slugger.slug(value)}`} color="fgPassive">
+                {value}
+              </Box>
+            </MenuItem>
+          ))}
+        </MenuList>
+      </>
+    ) : null;
+
+  const pages = usePagesData();
+  const pageIndex = pages.findIndex(node => node.id === currentPageId);
+  const nextPage = pages[pageIndex + 1];
+  const lastPage = pages[pageIndex - 1];
+
+  const lastLink = lastPage ? (
+    <MenuItem my={1}>
+      <Box as="a" href={lastPage.fields.slug} css={extraLinkStyle}>
+        <ArrowIcon rotate />
+        <GreyText>{` Previous `}</GreyText>
+        {`“${lastPage.frontmatter.title}”`}
+      </Box>
+    </MenuItem>
+  ) : null;
+
+  const nextLink = nextPage ? (
+    <MenuItem my={1}>
+      <Box as="a" href={nextPage.fields.slug} css={extraLinkStyle}>
+        <ArrowIcon />
+        <GreyText>{` Next `}</GreyText>
+        {`“${nextPage.frontmatter.title}”`}
+      </Box>
+    </MenuItem>
+  ) : null;
 
   return (
     <Box
@@ -53,28 +112,15 @@ const SectionList = ({ documentUrl, headings }) => {
       py={[2, 4]}
       css={overflowStyle}
     >
-      <Box as="h4" m={0} pb={2}>
-        In this section
-      </Box>
-
-      {headings.length > 1 ? (
-        <MenuList>
-          {headings.map(({ value }, index) => (
-            <MenuItem key={index}>
-              <Box as="a" href={`#${slugger.slug(value)}`} color="fgPassive">
-                {value}
-              </Box>
-            </MenuItem>
-          ))}
-        </MenuList>
-      ) : null}
-
+      {overview}
       <MenuList>
-        <MenuItem>
+        <MenuItem my={1}>
           <Box as="a" href={documentUrl} css={extraLinkStyle}>
             <GithubIcon /> Edit on GitHub
           </Box>
         </MenuItem>
+        {lastLink}
+        {nextLink}
       </MenuList>
     </Box>
   );
@@ -102,7 +148,11 @@ const DocTemplate = ({ data: { site, mdx } }) => {
         justifyContent={['flex-start', 'flex-start', 'space-between']}
         flexDirection={['column', 'column', 'row-reverse']}
       >
-        <SectionList documentUrl={documentUrl} headings={mdx.headings} />
+        <SectionList
+          documentUrl={documentUrl}
+          currentPageId={mdx.id}
+          headings={mdx.headings}
+        />
 
         <Box as="main" maxWidth={5} flex="1 1" py={3}>
           <MDXComponents>
