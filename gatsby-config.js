@@ -7,6 +7,7 @@ module.exports = {
     title: 'Docs System',
     description: 'A beatiful docs generator for Gatsby',
     siteUrl: 'https://docs-system.example.com',
+    githubUrl: 'https://github.com/kitten/gatsby-theme-docs-system',
   },
   plugins: [
     'gatsby-plugin-styled-components',
